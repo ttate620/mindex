@@ -1,0 +1,35 @@
+== Part 1 ==
+
+    Endpoint for ReportingStructure:
+
+     * READ
+         * HTTP Method: GET
+         * URL: localhost:8080/report/{employeeId}
+         * RESPONSE: ReportingStructure
+
+    - The task to get the number of direct reports is written in the form of a depth-first-search algorithm
+    but only keeps track of the number of reports.
+    It could be modified to return a list of all reports by passing an additional argument to the function getReports
+     which would hold a list of each report accounted for.
+
+
+== Part 2 ==
+
+    Endpoint for Compensation:
+    * CREATE
+        * HTTP Method: POST
+        * URL: localhost:8080/compensation
+        * PAYLOAD: Compensation
+        * RESPONSE: Compensation
+    * READ
+        * HTTP Method: GET
+        * URL: localhost:8080/compensation/{employeeId}
+        * RESPONSE: Compensation
+
+    - The effective date format is yyyy/MM/dd.
+    - I did not allow API users to create multiple Compensations for the same employee because the endpoint to read
+    relies on only the employeeId therefore it must correspond to only one Compensation.
+    If you wanted to allow this you could query the repository for all compensations matching the employeeId.
+    - Compensation stores the full Employee, this could cause issues in the future if an employee needs to change any info (ex. name).
+    You would need to update multiple repositories (EmployeeRepository and CompensationRepository). It would be better to only store employeeId in the CompensationRepository.
+
